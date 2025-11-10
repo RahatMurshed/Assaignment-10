@@ -46,8 +46,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-100 text-base-content px-4 py-30">
-      <div className="w-full max-w-lg bg-base-200 backdrop-blur-xl rounded-2xl border border-base-300 shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center mt-15 bg-base-100 text-base-content px-4 py-30">
+      <div className="w-full max-w-lg bg-[#ffffff15] backdrop-blur-xl rounded-2xl border border-base-300 shadow-lg p-8">
 
         {/* --- Header --- */}
         <h2 className="text-3xl font-semibold text-center mb-2 text-base-content">
@@ -109,7 +109,7 @@ const Register = () => {
           {/* Register Button */}
           <button
             type="submit"
-            className="btn bg-gradient-to-r from-[#F97316] to-orange-700 w-full rounded-lg text-white"
+            className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300 w-full"
           >
             Register
           </button>
@@ -121,7 +121,7 @@ const Register = () => {
         {/* --- Google Login --- */}
         <button
           onClick={googleLogin}
-          className="btn btn-outline w-full "
+          className="btn btn-outline rounded-xl w-full "
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

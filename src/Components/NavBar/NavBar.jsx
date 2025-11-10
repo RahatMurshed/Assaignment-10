@@ -21,33 +21,33 @@ const Navbar = () => {
     <>
       <NavLink
         to="/"
-        className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+        className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
       >
         Home
-        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
       </NavLink>
       <NavLink
         to="/find-partners"
-        className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+        className="relative text-base-content lg:text-xl font-bold hover:text-orange-500 transition duration-300 group"
       >
         Find Partners
-        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
       </NavLink>
       {user && (
         <>
           <NavLink
             to="/create-partner-profile"
-            className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+            className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
           >
             Create Partner Profile
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+            <span className="absolute bg-[#F97316] left-0 -bottom-1 w-0 h-0.5  group-hover:w-full transition-all duration-300"></span>
           </NavLink>
           <NavLink
             to="/my-connections"
-            className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+            className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
           >
             My Connections
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
           </NavLink>
         </>
       )}
@@ -55,10 +55,18 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-base-100/70 backdrop-blur-xl border-b border-base-content/10 shadow-lg transition-all duration-300">
+    <nav className="fixed top-0 left-0 w-full z-50  border-b-5 bg-white/30 backdrop-blur-xl border-b border-base-content/10 shadow-lg transition-all duration-300">
+      
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+        
+       
+
         {/* --- LOGO --- */}
-        <div className="flex items-center space-x-2 group">
+        <div className="flex items-center space-x-2 group ">
+
+{/* --- THEME TOGGLE --- */}
+      <input type="checkbox" value="night" className="toggle theme-controller" />
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
@@ -71,6 +79,8 @@ const Navbar = () => {
             StudyMate
           </h1>
         </div>
+
+        
 
         {/* --- DESKTOP MENU --- */}
         <div className="hidden md:flex items-center space-x-8 text-[15px] font-medium">
@@ -91,7 +101,7 @@ const Navbar = () => {
                     alt="User Avatar"
                     src={
                       user.photoURL ||
-                      "https://cdn-icons-png.flaticon.com/512/8792/8792047.png"
+                      "https://www.citypng.com/public/uploads/preview/download-profile-user-round-orange-icon-symbol-png-701751695033488zipyc2pvo5.png"
                     }
                   />
                 </div>
@@ -114,7 +124,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-4">
               <Link
                 to="/login"
-                className="text-base-content/80 hover:text-[#F97316] transition duration-300"
+                className="text-base-content font-bold lg:text-xl  hover:text-[#F97316] transition duration-300"
               >
                 Login
               </Link>
@@ -126,8 +136,7 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-          {/* --- THEME TOGGLE --- */}
-      <input type="checkbox" value="night" className="toggle theme-controller" />
+          
         </div>
 
         {/* --- MOBILE MENU BUTTON --- */}
@@ -167,14 +176,19 @@ const Navbar = () => {
             </svg>
           )}
         </button>
+      
       </div>
+      
 
       
 
       {/* --- MOBILE MENU --- */}
       {isOpen && (
         <div className="md:hidden bg-base-200 border-t border-base-content/10 backdrop-blur-lg">
+          
           <div className="flex flex-col items-center space-y-5 py-5">
+           
+
             {["Home", "Find Partners", "Features", "Contact"].map((item) => (
               <a
                 key={item}
@@ -198,6 +212,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
+              
                 <Link
                   to="/login"
                   className="text-base-content/80 hover:text-[#F97316] transition duration-300"
@@ -210,11 +225,18 @@ const Navbar = () => {
                 >
                   Get Started
                 </Link>
+
+                
               </>
+              
             )}
+            
           </div>
+          
         </div>
+        
       )}
+      
     </nav>
   );
 };

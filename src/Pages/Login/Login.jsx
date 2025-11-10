@@ -3,51 +3,44 @@ import { Link } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 
 const Register = () => {
-  const { createUser, googleLogin, setUser, profileUpdate, setLoading } = useContext(AuthContext);
+  const {  googleSignIn, setUser, signIn } = useContext(AuthContext);
   
 
- 
+ const handleLogIn = (e) => { 
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  console.log(email, password);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const photo = e.target.photo.value;
-    const password = e.target.password.value;
-    console.log(name, email, photo, password);
+  signIn(email, password)
+  .then((result)=>{
+    const loggedInUser = result.user;
+    setUser(loggedInUser);
+    console.log("User logged in successfully:", loggedInUser);
+  })
+  .catch((error)=>{
+    console.log("Login Error:", error);
+  });
 
-    createUser(email, password)
+ }
+
+
+ const handleGoogleLogin = () => {
+    googleSignIn()
       .then((result) => {
-        
-        // console.log(createdUser);
-        
-
-        profileUpdate({
-            displayName: name,
-            photoURL: photo
-        })
-
-        setLoading(true);
-
-        const createdUser = result.user;
-        
-
-        setUser(createdUser);
-        console.log("User registered successfully:", createdUser);
-        
-
+        console.log(result.user);
+        setUser(result.user);
       })
       .catch((error) => {
-        console.error("Registration Error:", error);
+        console.error("Google Login Error:", error);
       });
+    }
+ 
 
-      e.target.reset();
-    
-  };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-100 text-base-content px-4 py-30">
-      <div className="w-full max-w-lg bg-base-200 backdrop-blur-xl rounded-2xl border border-base-300 shadow-lg p-8">
+      <div className="w-full max-w-lg bg-[#ffffff18] backdrop-blur-xl rounded-2xl border border-base-300 shadow-lg p-8">
 
         {/* --- Header --- */}
         <h2 className="text-3xl font-semibold text-center mb-2 text-base-content">
@@ -58,7 +51,7 @@ const Register = () => {
         </p>
 
         {/* --- Form --- */}
-        <form onSubmit={handleRegister} className="space-y-5">
+        <form onSubmit={handleLogIn} className="space-y-5">
           
 
           {/* Email */}
@@ -100,7 +93,7 @@ const Register = () => {
           {/* Register Button */}
           <button
             type="submit"
-            className="btn bg-gradient-to-r from-[#F97316] to-orange-700 w-full rounded-lg text-white"
+            className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300 w-full"
           >
             Register
           </button>
@@ -111,8 +104,8 @@ const Register = () => {
 
         {/* --- Google Login --- */}
         <button
-          onClick={googleLogin}
-          className="btn btn-outline w-full "
+          onClick={handleGoogleLogin}
+          className="btn btn-outline rounded-xl w-full "
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

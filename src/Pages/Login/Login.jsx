@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import AuthContext from '../../Context/AuthContext';
 
 const Login = () => {
+    const {googleSignIn, setUser} = use(AuthContext);
+
+    const handleGoogleLogin = () => {
+        googleSignIn()
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            setUser(loggedUser);
+        })
+        .catch(error =>{
+            console.log(error.message);
+        })
+    };
+
     return (
          <div className="min-h-screen bg-[#111827] flex flex-col justify-center items-center px-4">
       {/* Logo + Name */}
@@ -69,7 +84,9 @@ const Login = () => {
           <div className="divider text-gray-500">OR</div>
 
           {/* Google Login */}
-          <button className="btn w-full bg-[#1F2937] border border-gray-700 text-gray-300 hover:border-[#F97316]">
+          <button
+          onClick={handleGoogleLogin}
+          className="btn w-full bg-[#1F2937] border border-gray-700 text-gray-300 hover:border-[#F97316]">
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"

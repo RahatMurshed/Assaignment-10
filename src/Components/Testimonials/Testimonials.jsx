@@ -21,7 +21,7 @@ const testimonials = [
     rating: 4.8,
   },
   {
-    name: "Tania Ahmed",
+    name: "justin kayle",
     image: "https://thumbs.dreamstime.com/b/african-american-male-student-college-uniform-holding-books-isolated-white-background-382240882.jpg",
     review:
       "It made online studying fun again. The UI is clean, smooth, and the partner feature is just genius! Highly recommended. Try it out now. ",

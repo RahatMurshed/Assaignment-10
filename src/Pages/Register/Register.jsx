@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 
 const Register = () => {
-  const { createUser, googleLogin, setUser, profileUpdate, setLoading } = useContext(AuthContext);
-  
 
- 
+  const [err, setErr] = useState("");
+
+
+  const { createUser, googleLogin, setUser, profileUpdate, setLoading } = useContext(AuthContext);
+
+
+
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -14,35 +18,41 @@ const Register = () => {
     const email = e.target.email.value;
     const photo = e.target.photo.value;
     const password = e.target.password.value;
-    console.log(name, email, photo, password);
+    // console.log(name, email, photo, password);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setErr("Password must include at least one uppercase, one lowercase letter, and be at least 6 characters long.");
+      return;
+    }
 
     createUser(email, password)
       .then((result) => {
-        
+
         // console.log(createdUser);
-        
+
 
         profileUpdate({
-            displayName: name,
-            photoURL: photo
+          displayName: name,
+          photoURL: photo
         })
 
         setLoading(true);
 
         const createdUser = result.user;
-        
+
 
         setUser(createdUser);
         console.log("User registered successfully:", createdUser);
-        
+
 
       })
       .catch((error) => {
         console.error("Registration Error:", error);
       });
 
-      e.target.reset();
-    
+    e.target.reset();
+
   };
 
   return (
@@ -104,7 +114,11 @@ const Register = () => {
               required
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
             />
+            {
+              err? <p className="text-red-500 text-sm">{err}</p>:""
+            }
           </div>
+
 
           {/* Register Button */}
           <button

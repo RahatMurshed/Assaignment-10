@@ -7,8 +7,9 @@ import useAxios from "../../Hooks/UseAxios";
 const PartnerDetails = () => {
   const { id } = useParams();
   const [partner, setPartner] = useState(null);
-  const [partnerCount, setPartnerCount] = useState(null);
+
   const axios = useAxios();
+  
 
 
   useEffect(() => {
@@ -16,10 +17,12 @@ const PartnerDetails = () => {
     .then(data=>{
         console.log(data.data);
         setPartner(data.data)
+        
+        
     })
   }, [id, axios]);
 
-  console.log(partner)
+ 
 
   if (!partner) {
     return (
@@ -42,7 +45,7 @@ const PartnerDetails = () => {
     await axios.patch(`/increament/${id}`)
      .then(data=>{
         console.log('After Update: ', data.data)
-        setPartner(partner.patnerCount + 1)
+        setPartner({...partner, patnerCount: partner.patnerCount + 1})
      })
   }
 

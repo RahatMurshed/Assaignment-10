@@ -110,7 +110,7 @@ const CreatePartnerProfile = () => {
                 Select Mode
               </option>
               <option>Online</option>
-              <option>Offline</option>
+              <option>In-person</option>
             </select>
           </div>
 

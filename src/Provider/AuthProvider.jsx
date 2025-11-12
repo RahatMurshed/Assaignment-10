@@ -5,6 +5,7 @@ import { auth } from '../firebase/firebase.init';
 
 const AuthProvider = ({children}) => {
 
+    const [partner, setPartner] = useState(null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -71,6 +72,8 @@ const AuthProvider = ({children}) => {
         setLoading,
         profileUpdate,
         logOut,
+        setPartner, 
+        partner
 
 
 

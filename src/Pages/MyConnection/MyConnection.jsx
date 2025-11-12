@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { FaTrashAlt, FaEdit, FaUserFriends, FaSpinner } from "react-icons/fa";
 import useAxios from "../../Hooks/UseAxios";
-import { useLoaderData } from "react-router";
+import AuthContext from "../../Context/AuthContext";
+import Swal from "sweetalert2";
+
 
 const MyConnections = () => {
     const axios = useAxios();
-
-
+    const { user } = use(AuthContext);
+    const [connections, setConnections] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const connections = useLoaderData();
-    console.log(connections)
+    useEffect(() => {
+
+        axios.get(`/my-connections?email=${user.email}`)
+            .then(data => {
+                setConnections(data.data)
+
+            })
+
+    }, [axios, setConnections, user])
 
 
     if (!connections) {
@@ -20,9 +29,37 @@ const MyConnections = () => {
 
 
 
-    const handleDelete = async (_id, partnerId) => {
-        await axios.delete(`/delete-connection/${_id}`)
-        await axios.patch(`/increament/${partnerId}`, { change: -1 })
+    const handleDelete = (_id, partnerId) => {
+
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                 axios.delete(`/delete-connection/${_id}`)
+         axios.patch(`/increament/${partnerId}`, { change: -1 })
+
+        const remainingConnections = connections.filter(connection => connection._id !== _id);
+        setConnections(remainingConnections)
+
+
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your connection has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+
+        
 
     }
 
@@ -56,7 +93,7 @@ const MyConnections = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {connections.map((partner, index) => (
+                        {connections?.map((partner, index) => (
                             <tr key={index} className="hover:bg-base-200/40 transition-colors">
                                 <td>{index + 1}</td>
                                 <td>
@@ -96,7 +133,7 @@ const MyConnections = () => {
 
             {/* --- Card layout for mobile --- */}
             <div className="sm:hidden grid grid-cols-1 gap-5 max-w-md mx-auto">
-                {connections.map((partner, index) => (
+                {connections?.map((partner, index) => (
                     <div
                         key={index}
                         className="card bg-base shadow-md border border-base-300 rounded-xl p-4"

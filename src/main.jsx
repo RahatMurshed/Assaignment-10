@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/my-connections',
-        loader:()=>fetch('http://localhost:3000/my-connections'),
+       
         element: <PrivateRoute>
           <MyConnection></MyConnection>
         </PrivateRoute>,

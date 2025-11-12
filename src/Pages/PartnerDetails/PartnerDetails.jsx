@@ -7,6 +7,7 @@ import AuthContext from "../../Context/AuthContext";
 
 const PartnerDetails = () => {
     const { id } = useParams();
+    const {user} = use(AuthContext);
    
     const { partner, setPartner } = use(AuthContext)
 
@@ -41,6 +42,7 @@ const PartnerDetails = () => {
         const myConnection = {
             partnerId:partner._id,
             name: partner.name,
+            email:user.email,
             profileimage: partner.profileimage,
             subject: partner.subject,
             studyMode: partner.studyMode,

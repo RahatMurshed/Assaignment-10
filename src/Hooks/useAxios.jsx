@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://assaignment-10-server-nu.vercel.app'
 })
 
 const useAxios = () => {

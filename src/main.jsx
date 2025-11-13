@@ -13,6 +13,8 @@ import CreateProfile from './Pages/CreateProfile/CreateProfile.jsx';
 import MyConnection from './Pages/MyConnection/MyConnection.jsx';
 import PrivateRoute from './Routes/PrivateRoutes.jsx';
 import PartnerDetails from './Pages/PartnerDetails/PartnerDetails.jsx';
+import Profile from './Pages/Profile/Profile.jsx';
+import NotFound from './Components/NoFound/NoFound.jsx';
 
 
 
@@ -58,6 +60,17 @@ const router = createBrowserRouter([
           <MyConnection></MyConnection>
         </PrivateRoute>,
       },
+      {
+        path: '/profile',
+       
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>,
+      },
+      {
+        path: '*',
+        Component: NotFound,
+      }
     
     ]
   },

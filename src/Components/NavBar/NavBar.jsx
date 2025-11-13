@@ -111,7 +111,7 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-200 text-base-content rounded-xl mt-3 w-52 p-2 shadow-xl border border-base-content/10 backdrop-blur-lg"
               >
                 <li>
-                  <a className="hover:text-[#F97316]">Profile</a>
+                  <Link to='/profile' className="hover:text-[#F97316]">Profile</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout} className="hover:text-[#F97316]">
@@ -192,9 +192,9 @@ const Navbar = () => {
            {link}
             {user ? (
               <>
-                <a className="text-base-content/80 hover:text-[#F97316]">
+                <Link to='/profile' className="text-base-content/80 hover:text-[#F97316]">
                   Profile
-                </a>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-base-content/80 hover:text-[#F97316]"
